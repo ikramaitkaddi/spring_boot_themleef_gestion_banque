@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>Consultation d'un Compte Courant</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<div th:replace="fragments::menu"></div>
+	<div class="container mt-5">
+	
+		<div class="card">
+			 
+			<div class="card-header">
+				<h5  th:text="|Code du compte :   ${codeCompte}|"></h5>
+				<h5 th:text="|Découvert :   ${decouvert}|"></h5>
+				<h5 th:text="|Date de création :   ${date}|"></h5>
+				<h5 th:text="|Solde :  ${solde}|"></h5>
+				<h5 th:text="|Code du client :  ${codeClient}|"></h5>
+				<h5 th:text="|Nom d'employée :   ${nomEmploye}|"></h5>
+                 	
+			
+			</div>	
+		</div>
+		<br><br>
+			<h5 th:text="|Opérations sur le compte  :  ${codeCompte}|"></h5>
+		<br><br>
+       <div class="card-body">
+				<h4>Opération du retrait</h4>
+
+				<form th:action="@{retirerCompteC}" method="">
+					<div class="mb-3">
+
+						<label classs="control-label">Somme à retirer</label>
+						<input type="text" name="somme" th:value="${somme}" class="p-1" />
+						<input  name="codeCompte" th:value="${codeCompte}" class="p-1" type="hidden"/>
+						<input  name="decouvert" th:value="${decouvert}" class="p-1" type="hidden"/>
+						<input  name="date" th:value="${date}" class="p-1" type="hidden"/>
+						<input  name="solde" th:value="${solde}" class="p-1" type="hidden"/>
+						<input  name="codeClient" th:value="${codeClient}" class="p-1" type="hidden"/>
+						<input  name="nomEmploye" th:value="${nomEmploye}" class="p-1" type="hidden"/>
+						<input  name="codeEmploye" th:value="${codeEmploye}" class="p-1" type="hidden"/>
+
+						<button   class="btn btn-warning">Retirer</button>
+						
+					</div>
+				</form>
+				<br>
+				<h4>Opération de Versement</h4>
+
+				<form th:action="@{verserCompteC}" method="">
+					<div class="mb-3">
+
+						<label classs="control-label">Somme à verser</label>
+						<input type="text" name="somme" th:value="${somme}" class="p-1" />
+						<input  name="codeCompte" th:value="${codeCompte}" class="p-1" type="hidden"/>
+						<input  name="decouvert" th:value="${decouvert}" class="p-1" type="hidden"/>
+						<input  name="date" th:value="${date}" class="p-1" type="hidden"/>
+						<input  name="solde" th:value="${solde}" class="p-1" type="hidden"/>
+						<input  name="codeClient" th:value="${codeClient}" class="p-1" type="hidden"/>
+						<input  name="nomEmploye" th:value="${nomEmploye}" class="p-1" type="hidden"/>
+						<input  name="codeEmploye" th:value="${codeEmploye}" class="p-1" type="hidden"/>
+
+						<button  class="btn btn-warning">Verser</button>
+						
+					</div>
+				</form>
+				<br>
+				<h4>Opération de Verement</h4>
+
+				<form th:action="@{vererCompteC}" method="">
+					<div class="mb-3">
+
+						<label classs="control-label">Somme à vere</label>
+						<input type="text" name="somme" th:value="${somme}" class="p-1" /><br>
+						<label classs="control-label"> Numéro du compte vers lequel vous voulez faire le verement</label>
+						<input type="text" name="code" th:value="${code}" class="p-1" />
+						<input  name="codeCompte" th:value="${codeCompte}" class="p-1" type="hidden"/>
+						<input  name="decouvert" th:value="${decouvert}" class="p-1" type="hidden"/>
+						<input  name="date" th:value="${date}" class="p-1" type="hidden"/>
+						<input  name="solde" th:value="${solde}" class="p-1" type="hidden"/>
+						<input  name="codeClient" th:value="${codeClient}" class="p-1" type="hidden"/>
+						<input  name="nomEmploye" th:value="${nomEmploye}" class="p-1" type="hidden"/>
+						<input  name="codeEmploye" th:value="${codeEmploye}" class="p-1" type="hidden"/>
+
+						<button   class="btn btn-warning">Verer</button>
+						
+					</div>
+				</form>
+				
+				<br> <br>
+
+			
+		</div>
+	</div>
+
+
+</body>
+
+</html>

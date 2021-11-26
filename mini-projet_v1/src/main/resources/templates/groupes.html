@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<title>groupes</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+	
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+
+<body>
+	
+	<div th:replace="fragments::menu"></div>
+	<div class="container mt-5">
+		<div class="card">
+			<div class="card-header">
+			
+			<form class="form-inline" th:action="@{groupes}" method="">
+					<div class="mb-3">
+						<label classs="control-label"> <h6> Mot Clé </h6></label>
+						<input style="border: 2px solid #000;width: 200px;
+  padding: 10px;
+  font-size: 15px;
+" type="text" name="motCle" th:value="${motCle}" class="p-1" />
+						<button class="btn btn-dark">
+						    <i class="fas fa-search"> </i> Chercher
+						</button>
+					</div>
+			</form>
+				
+			</div>	
+			<div class="card-body">
+				
+				
+					<form th:action="@{/saveGroupe}" method="POST" th:object="${groupe}" >
+					<div class="mb-3">
+						<!-- <label classs="control-label"> <h6>  Code du groupe  </h6></label>
+						<input type="text" name="codeGroupe" th:value="${codeGroupe}" class="p-1" />-->
+						<br><br>
+						<label classs="control-label"> <h6>  Nom du groupe  </h6> </label>
+						<input type="text" name="nomGroupe" th:value="${nomGroupe}" class="p-1" />
+						<br><br>
+						<label classs="control-label"> <h6>  Les employés de groupe </h6> </label>
+						<ul>
+						  <li th:each="Employ :${listEmployes}">
+						    <div>
+						        <input type="checkbox" th:field = "${groupe.employe}"  th:value="${Employ.codeEmploye}" >
+						        <label th:text="${Employ.nomEmploye}"></label>
+						    </div>
+						  </li>
+						</ul>
+						<br><br>
+						
+						<button onclick="javascript:return alert('Ajout avec succès')" class="btn btn-dark">
+                               <i class="far fa-plus-square"></i> Ajouter
+                        </button>
+                       
+						
+                 
+                 
+					</div>
+				</form>
+				</div>
+				<br> <br>
+				
+		</div>	
+		<div class="container mt-5">
+				<table class="table table-hover">
+					<tr>
+						<th>Code du groupe</th>
+						<th>Nom du groupe</th>
+						<th>employés</th>
+						
+					</tr>
+					<tr th:each="g:${pageGroupes.content}">
+						<td th:text="${g.codeGroupe}"></td>
+						<td th:text="${g.nomGroupe}"></td>
+						<td ><ul>
+						  <li th:each="Employ :${g.getEmploye()}">
+						    <div>
+						        <label th:text="${Employ.nomEmploye}"></label>
+						    </div>
+						  </li>
+						</ul>
+						</td>
+					   <!-- <td> <a class="btn btn-warning" th:href="@{employesGroupe(codeGroupe=${g.codeGroupe})}"><i class="fas fa-eye"></i> Consulter</a></td>-->
+					</tr>
+				</table>
+				<br><br>
+				<ul class="nav nav-pills">
+					<li th:each="page,status:${pages}">
+						<a th:class="${status.index==currentPage?'btn btn-warning':'btn'}" class="btn"
+							th:href="@{groupes(page=${status.index},size=${size},motCle=${motCle})}"
+							th:text="${status.index}"></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	
+</body>
+
+</html>
